@@ -12,7 +12,11 @@
 
     <input type="hidden" name="id" id="idForDeletion" value=""/>
     <div class="flex flex-row-reverse mt-5">
-        <x-button-red class="mx-5">Delete</x-button-red>
-        <x-button-white x-on:click='deleteModalVisibility = ! deleteModalVisibility'>Cancel</x-button-white>
+        <div>
+            <x-button-red class="mx-5">Delete</x-button-red>
+        </div>
+        <div>
+            <x-button-white x-on:click='deleteModalVisibility = ! deleteModalVisibility'>Cancel</x-button-white>
+        </div>
     </div>
 </form>

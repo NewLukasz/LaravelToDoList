@@ -32,4 +32,15 @@ class CategoryController extends Controller
         Category::destroy($id);
         return redirect('categories');
     }
+
+    public function edit(Request $request){
+        $idOfCategory = $request['id'];
+        $categoryNewName = $request['name'];
+
+        $categoryToEdit = Category::find($idOfCategory);
+        $categoryToEdit->name = $categoryNewName;
+        $categoryToEdit->save();
+
+        return redirect('categories');
+    }
 }

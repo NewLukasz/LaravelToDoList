@@ -15,8 +15,9 @@
 
     function addRow(item) {
         var deleteCell = setDataForDeleteCell(item.name,item.id);
+        var editCell = setDataForEditCell(item.name,item.id);
         data.addRows([
-            [item.name, 'Edit', deleteCell]
+            [item.name, editCell, deleteCell]
         ]);
     }
 
@@ -31,13 +32,24 @@
     return "<div class='flex justify-center'><button onclick='sendDataToDeleteModal(this)'id='"+itemId+"' name='"+itemName +"' x-on:click='deleteModalVisibility = ! deleteModalVisibility'>"+deleteIcon+"</button></div>";
   };
 
+  function setDataForEditCell(itemName, itemId){
+      var editIcon = "<svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'> <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z' /></svg>";
+      return "<div class='flex justify-center'><button onclick='sendDataToEditModal(this)'id='"+itemId+"' name='"+itemName +"' x-on:click='editModalVisibility = ! editModalVisibility'>"+editIcon+"</button></div>";
+  }
+
+  function sendDataToEditModal(element){
+    document.getElementById("nameOfEditingThing").innerHTML = element.name;
+    document.getElementById('inputName').value=element.name;
+    document.getElementById('idForEditon').value=element.id;
+    }
+
   function sendDataToDeleteModal(element){
     document.getElementById('idForDeletion').value=element.id;
     document.getElementById("name").innerHTML = element.name;
   };
 </script>
 
-<div x-data='{deleteModalVisibility: false}'>
+<div x-data='{deleteModalVisibility: false, editModalVisibility : false}'>
     @if(count($dataArrayWithProjectsOrCategories)==0)
         <div class="flex justify-center">
             There are no data please add some.
@@ -50,6 +62,9 @@
 
     <div x-show="deleteModalVisibility">
         <x-modals.delete-category-or-project/>
+    </div>
+    <div x-show="editModalVisibility">
+        <x-modals.edit-category-or-project/>
     </div>
 </div>
 
