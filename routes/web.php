@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,14 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+/*
+Route::get('/categories', function () {
+    return view('categories');
+})->middleware(['auth'])->name('categories');
+*/
+Route::prefix('/categories')->group(function(){
+    Route::get('',[CategoryController::class,'index'])->middleware(['auth'])->name('categories');
+    Route::post('/store',[CategoryController::class,'store'])->middleware(['auth']);
+});
 
 require __DIR__.'/auth.php';
