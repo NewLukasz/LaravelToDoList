@@ -7,7 +7,7 @@
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Name');
     data.addColumn('string', 'Edit');
-    data.addColumn('string', '');
+    data.addColumn('string', 'Delete');
 
     var tableData = @json($dataArrayWithProjectsOrCategories);
 
@@ -59,12 +59,11 @@
             <div class="w-5/6" id="table"></div>
         </div>
     @endif
-
     <div x-show="deleteModalVisibility">
-        <x-modals.delete-category-or-project/>
+        <x-modals.delete-category-or-project type="{{$type}}"/>
     </div>
     <div x-show="editModalVisibility">
-        <x-modals.edit-category-or-project/>
+        <x-modals.edit-category-or-project type="{{$type}}"/>
     </div>
 </div>
 

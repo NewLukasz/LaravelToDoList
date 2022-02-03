@@ -1,4 +1,8 @@
+@if($type=="categories")
 <form action="{{url('/categories/edit')}}" method="POST">
+@elseif($type=="projects")
+<form action="{{url('/projects/edit')}}" method="POST">
+@endif
     @csrf
     <div class="text-xl font-medium mt-4">
         Your are editing:

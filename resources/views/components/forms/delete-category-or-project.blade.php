@@ -1,4 +1,8 @@
+@if($type=="categories")
 <form action="{{url('/categories/delete')}}" method="POST">
+@elseif($type=="projects")
+<form action="{{url('/projects/delete')}}" method="POST">
+@endif
     @csrf
     <div class="text-xl font-medium mt-4">
         Are you sure that you want to delete this category?
