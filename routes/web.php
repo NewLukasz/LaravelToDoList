@@ -29,6 +29,7 @@ Route::get('/categories', function () {
 Route::prefix('/categories')->group(function(){
     Route::get('',[CategoryController::class,'index'])->middleware(['auth'])->name('categories');
     Route::post('/store',[CategoryController::class,'store'])->middleware(['auth']);
+    Route::post('/delete',[CategoryController::class,'delete'])->middleware(['auth']);
 });
 
 require __DIR__.'/auth.php';

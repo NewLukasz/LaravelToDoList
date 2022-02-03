@@ -20,10 +20,16 @@ class CategoryController extends Controller
         $userId = Auth::user()->id;
 
         $newCategory = new Category;
-        $newCategory->categoryName=$newCategoryName;
+        $newCategory->name=$newCategoryName;
         $newCategory->userId=$userId;
         $newCategory->save();
 
+        return redirect('categories');
+    }
+
+    public function delete(Request $request){
+        $id = $request['id'];
+        Category::destroy($id);
         return redirect('categories');
     }
 }
