@@ -16,7 +16,7 @@ class CategoryController extends Controller
     }
 
     public function store(Request $request){
-        $newCategoryName = $request['newCategoryName'];
+        $newCategoryName = $request['newName'];
         $userId = Auth::user()->id;
 
         $newCategory = new Category;
