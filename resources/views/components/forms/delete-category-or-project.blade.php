@@ -5,7 +5,11 @@
 @endif
     @csrf
     <div class="text-xl font-medium mt-4">
+        @if($type=="categories")
         Are you sure that you want to delete this category?
+        @elseif($type=="projects")
+        Are you sure that you want to delete this project?
+        @endif
     </div>
     <div id="name" class="flex justify-center my-5 text-3xl">
     </div>
