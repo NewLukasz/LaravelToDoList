@@ -21,9 +21,9 @@
             <div class="col-span-3">
                 <label for="prio" class="block text-sm font-medium text-gray-700">Prority</label>
                 <select id="prio" name="prioId" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                    <option value='1'>1 - normal</option>
-                    <option value='2'>2 - high</option>
-                    <option value='3'>3 - critical</option>
+                    <option value='1'>Normal</option>
+                    <option value='2'>High</option>
+                    <option value='3'>Critical</option>
                 </select>
             </div>
 

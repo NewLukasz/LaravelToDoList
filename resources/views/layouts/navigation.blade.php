@@ -17,6 +17,11 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('allTasksOvierview')" :active="request()->routeIs('allTasksOvierview')">
+                        {{ __('All tasks overview') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('addNewTask')" :active="request()->routeIs('addNewTask')">
                         {{ __('Add new task') }}
                     </x-nav-link>

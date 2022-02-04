@@ -18,12 +18,13 @@ class CreateTasksTable extends Migration
             $table->timestamps();
             $table->integer('userId');
             $table->string('name');
-            $table->integer('statusId')->nullable();
-            $table->integer('categoryId')->nullable();
-            $table->integer('projectId')->nullable();
+            $table->integer('prioId')->default(1);
+            $table->integer('statusId')->nullable()->default(1);
+            $table->integer('categoryId')->default(0);
+            $table->integer('projectId')->default(0);
             $table->string('source')->nullable();
-            $table->date('startDate')->useCurrent();
-            $table->date('dueDate')->nullable();
+            $table->date('startDate');
+            $table->date('dueDate');
             $table->longText('notes')->nullable();
         });
     }
