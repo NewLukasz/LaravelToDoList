@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,16 +22,19 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-/*
-Route::get('/categories', function () {
-    return view('categories');
-})->middleware(['auth'])->name('categories');
-*/
+
 Route::prefix('/categories')->group(function(){
     Route::get('',[CategoryController::class,'index'])->middleware(['auth'])->name('categories');
     Route::post('/store',[CategoryController::class,'store'])->middleware(['auth']);
     Route::post('/delete',[CategoryController::class,'delete'])->middleware(['auth']);
     Route::post('/edit',[CategoryController::class,'edit'])->middleware(['auth']);
+});
+
+Route::prefix('/projects')->group(function(){
+    Route::get('',[ProjectController::class,'index'])->middleware(['auth'])->name('projects');
+    Route::post('/store',[ProjectController::class,'store'])->middleware(['auth']);
+    Route::post('/delete',[ProjectController::class,'delete'])->middleware(['auth']);
+    Route::post('/edit',[ProjectController::class,'edit'])->middleware(['auth']);
 });
 
 require __DIR__.'/auth.php';
