@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,5 +37,11 @@ Route::prefix('/projects')->group(function(){
     Route::post('/delete',[ProjectController::class,'delete'])->middleware(['auth']);
     Route::post('/edit',[ProjectController::class,'edit'])->middleware(['auth']);
 });
+
+Route::prefix('/addNewTask')->group(function(){
+    Route::get('',[TaskController::class,'index'])->middleware(['auth'])->name('addNewTask');
+    Route::post('store',[TaskController::class,'store'])->middleware(['auth']);
+});
+
 
 require __DIR__.'/auth.php';
