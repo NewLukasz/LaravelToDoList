@@ -30,14 +30,23 @@ class TaskController extends Controller
         return redirect('allTasksOvierview');
     }
 
-    public function getDataToForm(){
-        $userId = Auth::user()->id;
-        $categories = Category::where('userId',$userId)->get();
-        $projects = Project::where('userId',$userId)->get();
+    public function prepareDataToAddTaskForm(){
+        $categories = TaskController::getCategories();
+        $projects = TaskController::getProjects();
         return view('addNewTask',[
             'categories' => $categories,
             'projects' => $projects
         ]);
+    }
+
+    public static function getCategories(){
+        $userId = Auth::user()->id;
+        return Category::where('userId',$userId)->get();
+    }
+
+    public static function getProjects(){
+        $userId = Auth::user()->id;
+        return Project::where('userId',$userId)->get();
     }
 
     public function store(Request $request){
@@ -61,5 +70,34 @@ class TaskController extends Controller
         $newTask->save();
 
         return redirect('addNewTask');
+    }
+
+    public function editTask(Request $request){
+        $existingTask = Task::find($request['taskId']);
+        if($existingTask->name!=$request['taskName']){
+            $existingTask->name=$request['taskName'];
+        }
+        if($existingTask->prioId!=$request['prioId']){
+            $existingTask->prioId=$request['prioId'];
+        }
+        if($existingTask->statusId!=$request['statusId']){
+            $existingTask->statusId=$request['statusId'];
+        }
+        if($existingTask->categoryId!=$request['categoryId']){
+            $existingTask->categoryId=$request['categoryId'];
+        }
+        if($existingTask->projectId!=$request['projectId']){
+            $existingTask->projectId=$request['projectId'];
+        }
+        if($existingTask->source!=$request['source']){
+            $existingTask->source=$request['source'];
+        }
+        if($existingTask->notes!=$request['notes']){
+            $existingTask->notes=$request['notes'];
+        }
+
+
+        $existingTask->save();
+        return redirect('/allTasksOvierview');
     }
 }

@@ -52,12 +52,12 @@
 
             <div class="col-span-3 mb-1">
                 <label for="datepicker" class="block text-sm font-medium text-gray-700">Start date</label>
-              <x-date-picker name="startDate"/>
+              <x-date-picker name="startDate" id="startDate"/>
             </div>
 
             <div class="col-span-3">
                 <label for="datepicker" class="block text-sm font-medium text-gray-700">Due date</label>
-                <x-date-picker name="dueDate"/>
+                <x-date-picker name="dueDate" id="dueDate"/>
             </div>
 
             <div class="col-span-6 mb-5">

@@ -2,7 +2,7 @@
 
         <div class="relative">
             <input type="hidden" name="{{$name}}" x-ref="date" :value="datepickerValue" />
-            <input type="text" x-on:click="showDatepicker = !showDatepicker" x-model="datepickerValue" x-on:keydown.escape="showDatepicker = false" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Select date" readonly/>
+            <input type="text"  id={{$id}} x-on:click="showDatepicker = !showDatepicker" x-model="datepickerValue" x-on:keydown.escape="showDatepicker = false" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Select date" readonly/>
 
 
             <div class="bg-neutral-300 border-2 mt-12 rounded-lg shadow p-4 absolute bottom-10 left-0" style="width: 17rem" x-show.transition="showDatepicker" @click.away="showDatepicker = false">

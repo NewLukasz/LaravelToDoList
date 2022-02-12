@@ -39,13 +39,14 @@ Route::prefix('/projects')->group(function(){
 });
 
 Route::prefix('/addNewTask')->group(function(){
-    Route::get('',[TaskController::class,'getDataToForm'])->middleware(['auth'])->name('addNewTask');
+    Route::get('',[TaskController::class,'prepareDataToAddTaskForm'])->middleware(['auth'])->name('addNewTask');
     Route::post('store',[TaskController::class,'store'])->middleware(['auth']);
 });
 
 Route::prefix('/allTasksOvierview')->group(function(){
     Route::get('',[TaskController::class,'index'])->middleware(['auth'])->name('allTasksOvierview');
     Route::post('setAsDone',[TaskController::class,'setAsDone'])->middleware(['auth']);
+    Route::post('editTask',[TaskController::class,'editTask'])->middleware(['auth']);
 });
 
 require __DIR__.'/auth.php';
