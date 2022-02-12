@@ -6,9 +6,9 @@
         var idOfChosenTask = document.getElementById('idOfTaskForEdit').value;
         document.getElementById('hiddenPresentStatus').innerHTML="piesek";
         document.getElementById('hiddenPresentStatus').value="4";
-        @json($tasks).forEach(przyklad);
+        @json($tasks).forEach(setRow);
 
-        function przyklad(task){
+        function setRow(task){
             if(idOfChosenTask==task.id){
                 document.getElementById('nameOfTaskForEdit').innerHTML=task.name;
                 document.getElementById('taskName').value=task.name;
@@ -21,10 +21,28 @@
                 document.getElementById('hiddenPresentProject').innerHTML=getCategoryOrProjectNameBasedOnId(@json($projects), task.projectId);
                 document.getElementById('hiddenPresentProject').value=task.projectId;
                 document.getElementById('source').value=task.source;
-                document.getElementById('dueDate').value=new Date(task.dueDate);
-                document.getElementById('startDate').value=new Date(task.startDate);
+                document.getElementById('dueDate').value=changeDateFormat(task.dueDate);
+                document.getElementById('startDate').value=zamianaFormatuDaty(task.startDate);
                 document.getElementById('notes').value=task.notes;
             }
+        }
+
+        function changeDateFormat(dateString){
+            date = new Date(dateString);
+            var day = date.getDate();
+            var year = date.getFullYear();
+            var month = date.getMonth()+1;
+            if(day<=9){
+                day='0'+day.toString();
+            }else{
+                day=day.toString();
+            }
+            if(month<=9){
+                month='0'+month.toString();
+            }else{
+                month=month.toString();
+            }
+            return day+'-'+month+'-'+year.toString();
         }
 
         function getCategoryOrProjectNameBasedOnId(projectsOrCategoriesdataArray, id){
@@ -122,11 +140,6 @@
                 </select>
             </div>
 
-            <div class="col-span-2">
-                <label for="source-name" class="block text-sm font-medium text-gray-700">Source name</label>
-                <input type="text" id="source" name="source"class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-            </div>
-
             <div class="col-span-2 mb-1">
                 <label for="datepicker" class="block text-sm font-medium text-gray-700">Start date</label>
               <x-date-picker name="startDate" id="startDate"/>
@@ -135,6 +148,11 @@
             <div class="col-span-2">
                 <label for="datepicker" class="block text-sm font-medium text-gray-700">Due date</label>
                 <x-date-picker name="dueDate" id="dueDate"/>
+            </div>
+
+            <div class="col-span-2">
+                <label for="source-name" class="block text-sm font-medium text-gray-700">Source name</label>
+                <input type="text" id="source" name="source"class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
             </div>
 
             <div class="col-span-6">

@@ -92,6 +92,14 @@ class TaskController extends Controller
         if($existingTask->source!=$request['source']){
             $existingTask->source=$request['source'];
         }
+        if($existingTask->dueDate!=$request['dueDate']){
+            $dueDate = strtotime($request['dueDate']);
+            $existingTask->dueDate=date('Y-m-d H:i:s', $dueDate);
+        }
+        if($existingTask->startDate!=$request['startDate']){
+            $startDate = strtotime($request['startDate']);
+            $existingTask->startDate=date('Y-m-d H:i:s', $startDate);
+        }
         if($existingTask->notes!=$request['notes']){
             $existingTask->notes=$request['notes'];
         }
