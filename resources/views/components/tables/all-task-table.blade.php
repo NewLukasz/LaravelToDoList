@@ -13,6 +13,11 @@
         document.getElementById("idOfDoneTask").value = element.id;
     }
 
+    function sendDataToDeleteModal(task){
+        document.getElementById("idForDeletion").value=task.id;
+        document.getElementById("name").innerHTML=task.name;
+    }
+
 
     function drawTable() {
     var data = new google.visualization.DataTable();
@@ -47,9 +52,9 @@
             task.startDate,
             task.dueDate,
             checkIfNotesExists(task.notes),
-            setDataForDoneCell(task.name,task.id),
+            setDataForDoneCell(task),
             setDataForEditCell(task),
-            'Delete'
+            setDataForDeleteCell(task)
             ]
         ]);
         iteration++;
@@ -62,7 +67,20 @@
         return "<div class='flex justify-center'><button onclick='sendDataToEditModal(this)' id='"+task.id+"' x-on:click='editModalVisibility = ! editModalVisibility'>"+editIcon+"</button></div>";
     };
 
+    function setDataForDeleteCell(task){
+        var deleteIcon = "<svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16' /></svg>";
+        return "<div class='flex justify-center'><button onclick='sendDataToDeleteModal(this)' id='"+task.id+"' name='"+task.name+"' x-on:click='deleteModalVisibility = ! deleteModalVisibility'>"+deleteIcon+"</button></div>";
+    }
 
+    function setDataForDoneCell(task){
+        if(task.statusId!=3){
+            var doneIcon = "<svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'> <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 13l4 4L19 7' /></svg>";
+            return "<div class='flex justify-center'><button onclick='sendDataToDoneModal(this)' id='"+task.id+"' name='"+task.name +"' x-on:click='doneModalVisibility = ! doneModalVisibility'>"+doneIcon+"</button></div>";
+        }else{
+            return "";
+        }
+
+    };
 
     function checkIfNotesExists(notes){
         if(notes){
@@ -72,10 +90,7 @@
         }
     }
 
-    function setDataForDoneCell(itemName, itemId){
-        var doneIcon = "<svg xmlns='http://www.w3.org/2000/svg' class='h-6 w-6' fill='none' viewBox='0 0 24 24' stroke='currentColor'> <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 13l4 4L19 7' /></svg>";
-        return "<div class='flex justify-center'><button onclick='sendDataToDoneModal(this)' id='"+itemId+"' name='"+itemName +"' x-on:click='doneModalVisibility = ! doneModalVisibility'>"+doneIcon+"</button></div>";
-    };
+
 
     function showStatusString(statusId){
         switch(statusId){
@@ -117,9 +132,12 @@
 <div x-data='{doneModalVisibility: false, deleteModalVisibility: false, editModalVisibility : false}'>
     <div id="table_div"></div>
     <div x-show="doneModalVisibility">
-        <x-modals.done-task />
+        <x-modals.done-task/>
     </div>
     <div x-show="editModalVisibility">
         <x-modals.edit-task :tasks="$tasks" :categories="$categories" :projects="$projects"/>
+    </div>
+    <div x-show="deleteModalVisibility">
+        <x-modals.delete-task/>
     </div>
 </div>

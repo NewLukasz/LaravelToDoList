@@ -47,6 +47,7 @@ Route::prefix('/allTasksOvierview')->group(function(){
     Route::get('',[TaskController::class,'index'])->middleware(['auth'])->name('allTasksOvierview');
     Route::post('setAsDone',[TaskController::class,'setAsDone'])->middleware(['auth']);
     Route::post('editTask',[TaskController::class,'editTask'])->middleware(['auth']);
+    Route::post('deleteTask',[TaskController::class,'deleteTask'])->middleware(['auth']);
 });
 
 require __DIR__.'/auth.php';

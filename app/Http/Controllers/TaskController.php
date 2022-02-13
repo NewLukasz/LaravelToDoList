@@ -108,4 +108,9 @@ class TaskController extends Controller
         $existingTask->save();
         return redirect('/allTasksOvierview');
     }
+
+    public function deleteTask(Request $request){
+        Task::destroy($request['id']);
+        return redirect('/allTasksOvierview');
+    }
 }
