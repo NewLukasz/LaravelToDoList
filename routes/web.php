@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,18 @@ Route::prefix('/projects')->group(function(){
     Route::post('/store',[ProjectController::class,'store'])->middleware(['auth']);
     Route::post('/delete',[ProjectController::class,'delete'])->middleware(['auth']);
     Route::post('/edit',[ProjectController::class,'edit'])->middleware(['auth']);
+});
+
+Route::prefix('/addNewTask')->group(function(){
+    Route::get('',[TaskController::class,'prepareDataToAddTaskForm'])->middleware(['auth'])->name('addNewTask');
+    Route::post('store',[TaskController::class,'store'])->middleware(['auth']);
+});
+
+Route::prefix('/allTasksOvierview')->group(function(){
+    Route::get('',[TaskController::class,'index'])->middleware(['auth'])->name('allTasksOvierview');
+    Route::post('setAsDone',[TaskController::class,'setAsDone'])->middleware(['auth']);
+    Route::post('editTask',[TaskController::class,'editTask'])->middleware(['auth']);
+    Route::post('deleteTask',[TaskController::class,'deleteTask'])->middleware(['auth']);
 });
 
 require __DIR__.'/auth.php';
